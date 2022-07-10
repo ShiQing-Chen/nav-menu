@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        html, body, #app, .el-container {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        .el-row {
+            margin-bottom: 20px;
+        }
+
+        .el-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .box-card {
+            margin-bottom: 60px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-header>
+            <el-row>
+                <el-col>
+                    <el-alert
+                            center
+                            :closable="false"
+                            title="欢迎使用导航中心"
+                            type="success">
+                    </el-alert>
+                </el-col>
+            </el-row>
+        </el-header>
+        <el-main>
+            <el-card class="box-card" v-for="group in navData">
+                <div slot="header" class="clearfix">
+                    <span>{{group.title}}</span>
+                </div>
+                <div class="body">
+                    <el-row v-for="itemList in group.data">
+                        <el-col :span="2" v-for="item in itemList">
+                            <el-link :href="item.url" target="_blank">
+                                <el-tag :type="item.tagType">
+                                    {{item.title}}
+                                </el-tag>
+                            </el-link>
+                        </el-col>
+                    </el-row>
+                </div>
+            </el-card>
+        </el-main>
+        <el-footer>
+            <el-row>
+                <el-col>
+                    <el-alert
+                            center
+                            :closable="false"
+                            title="只许看，不许动哦~"
+                            type="success">
+                    </el-alert>
+                </el-col>
+            </el-row>
+        </el-footer>
+    </el-container>
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                navData:
+                    [
+                        {
+                            title: "开发",
+                            data: [
+                                [
+                                    {tagType: "", url: "https://git.farmeryun.com", title: "Git"},
+                                    {tagType: "", url: "https://jenkins.farmeryun.com", title: "Jenkins"},
+                                    {tagType: "", url: "https://vercel.com/shiqing-chen", title: "Vercel"}
+                                ],
+                                [
+                                    {tagType: "", url: "http://metabase.dev.farmeryun.com", title: "Metabase"}
+                                ]
+                            ]
+                        },
+                        {
+                            title: "工具",
+                            data: [
+                                [
+                                    {tagType: "", url: "https://www.json.cn", title: "Json格式化"},
+                                    {tagType: "", url: "http://tool.c7sky.com/password", title: "随机密码生成"},
+                                    {tagType: "", url: "https://cron.qqe2.com", title: "Cron表达式生成器"}
+                                ]
+                            ]
+                        },
+                        {
+                            title: "第三方统计",
+                            data: [
+                                [
+                                    {tagType: "", url: "https://tongji.baidu.com/main/homepage/10000323945/homepage/index", title: "百度统计"}
+                                ]
+                            ]
+                        }
+                    ]
+            }
+        }
+    })
+</script>
+</html>
